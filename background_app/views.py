@@ -5,7 +5,6 @@ from background_task.models import Task, CompletedTask      # To access the data
 # Create your views here.
 
 @background # Initialization: Background Decorator
-
 def hello(task_id): # Background Function, parameter must all be serializable as JSON
 
     if task_id == 1:
