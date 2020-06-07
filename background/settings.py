@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'background_task',
+    'background_task', # Has to be added to use django-background-tasks
     'background_app',
 ]
 
@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join('static'),)
+STATICFILES_DIRS = (os.path.join('static'),) # For Windows this line has to be added to use static folder

@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect, HttpResponse
-from background_task import background
-from background_task.models import Task, CompletedTask
+from django.shortcuts import render, redirect, HttpResponse # To display the website data
+from background_task import background                      # Import the django-background-tasks module
+from background_task.models import Task, CompletedTask      # To access the data stored in the database to display the tasks
 
 # Create your views here.
 
-@background
+@background # Initialization: Background Decorator
 
-def hello(task_id):
+def hello(task_id): # Background Function, parameter must all be serializable as JSON
 
     if task_id == 1:
         print("Hello Task 1!")
@@ -18,24 +18,24 @@ def hello(task_id):
         print("Hello Task 3!")
 
 
-# def background_view(request):
-#    hello(repeat=10, repeat_until=None)
+# def background_view(request): # Test Function for repeating tasks, HttpResponse happens immediately so you see "hello" function runs in background
+#    hello(1, repeat=10, repeat_until=None)
 #    return HttpResponse("Hello World!")
 
 
-def home(request):
+def home(request): # renders home.html, located in templates folder
 
     return render(request, "home.html")
 
 
-def start_task(request, task_id):
+def start_task(request, task_id): # Function is called via urls.py over the home.html and starts the task
 
     hello(task_id)
 
     return redirect(home)
 
 
-def tasks(request):
+def tasks(request): # Shows the database entrys for running and completed tasks
 
     running_tasks = Task.objects.values('task_name', 'run_at', 'task_params')
 
